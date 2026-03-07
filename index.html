@@ -8,19 +8,18 @@
 <style>
 :root {
   --ink:       #0B2A5B;
-  --ink-80:    rgba(11,42,91,0.8);
-  --ink-50:    rgba(11,42,91,0.5);
-  --ink-15:    rgba(11,42,91,0.07);
+  --ink-90:    rgba(11,42,91,0.9);
+  --ink-60:    rgba(11,42,91,0.6);
+  --ink-20:    rgba(11,42,91,0.08);
   --azure:     #2FA8E0;
   --azure-mid: #1E78C8;
   --white:     #FFFFFF;
-  --off:       #F5F8FC;
-  --off2:      #EEF3F9;
+  --off:       #F6F9FC;
+  --off2:      #EEF3FA;
   --border:    rgba(11,42,91,0.1);
-  --gold:      #C8A84B;
   --r:         8px;
-  --shadow-sm: 0 2px 12px rgba(11,42,91,0.06);
-  --shadow-md: 0 8px 32px rgba(11,42,91,0.10);
+  --shadow-sm: 0 2px 12px rgba(11,42,91,0.07);
+  --shadow-md: 0 8px 36px rgba(11,42,91,0.10);
 }
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -32,12 +31,13 @@ body {
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
 }
+
 ::-webkit-scrollbar { width:4px; }
 ::-webkit-scrollbar-track { background:#f0f4f8; }
 ::-webkit-scrollbar-thumb { background:var(--azure-mid); border-radius:99px; }
 
-/* ─── UTILITY ─────────────────────────── */
 .container { max-width:1160px; margin:0 auto; padding:0 40px; }
+
 .eyebrow {
   display:inline-flex; align-items:center; gap:10px;
   font-size:10px; font-weight:700; letter-spacing:3px;
@@ -45,8 +45,9 @@ body {
 }
 .eyebrow::before {
   content:''; width:24px; height:2px;
-  background:linear-gradient(90deg,var(--azure),var(--azure-mid)); flex-shrink:0;
+  background:var(--azure-mid); flex-shrink:0;
 }
+
 h2.display {
   font-family:'Playfair Display',serif;
   font-size:clamp(30px,3.5vw,46px);
@@ -54,387 +55,296 @@ h2.display {
   color:var(--ink); margin-bottom:16px;
 }
 h2.display em { font-style:italic; color:var(--azure-mid); }
+
 .lead {
-  font-size:15px; font-weight:400; line-height:1.8;
-  color:var(--ink-50); max-width:520px;
+  font-size:14.5px; font-weight:400; line-height:1.8;
+  color:var(--ink-60); max-width:500px;
 }
+
 .btn {
   display:inline-flex; align-items:center; gap:8px;
   font-family:'Montserrat',sans-serif;
   font-size:11px; font-weight:700; letter-spacing:1.5px;
   text-transform:uppercase; text-decoration:none;
-  padding:13px 28px; border-radius:4px;
+  padding:12px 26px; border-radius:4px;
   cursor:pointer; border:none; transition:all .22s;
 }
 .btn-primary {
   background:linear-gradient(110deg,var(--azure-mid),var(--azure));
-  color:#fff; box-shadow:0 4px 18px rgba(30,120,200,0.30);
+  color:#fff; box-shadow:0 4px 18px rgba(30,120,200,0.3);
 }
-.btn-primary:hover { box-shadow:0 8px 26px rgba(30,120,200,0.44); transform:translateY(-2px); }
+.btn-primary:hover { box-shadow:0 8px 28px rgba(30,120,200,0.45); transform:translateY(-2px); }
 .btn-outline {
   background:transparent; color:var(--ink);
   border:1.5px solid var(--border);
 }
-.btn-outline:hover { border-color:var(--azure); color:var(--azure-mid); }
-.btn-outline-white {
-  background:transparent; color:#fff;
-  border:1.5px solid rgba(255,255,255,0.35);
+.btn-outline:hover { border-color:var(--azure-mid); color:var(--azure-mid); }
+.btn-outline-dark {
+  background:transparent; color:var(--ink);
+  border:1.5px solid rgba(11,42,91,0.2);
 }
-.btn-outline-white:hover { border-color:#fff; background:rgba(255,255,255,0.08); }
-.arrow { font-size:15px; transition:transform .18s; }
+.btn-outline-dark:hover { border-color:var(--azure-mid); color:var(--azure-mid); }
+.arrow { font-size:14px; transition:transform .2s; }
 .btn:hover .arrow { transform:translateX(4px); }
 
-/* ─── NAV ─────────────────────────────── */
+/* ─── NAV ─── */
 #nav {
   position:fixed; top:0; left:0; right:0; z-index:1000;
-  height:68px;
-  transition:background .3s, box-shadow .3s, height .3s;
-}
-#nav.scrolled {
-  background:rgba(11,42,91,0.97);
+  height:68px; background:rgba(255,255,255,0.97);
+  border-bottom:1px solid var(--border);
   backdrop-filter:blur(16px);
-  box-shadow:0 4px 24px rgba(11,42,91,0.22);
-  height:60px;
+  transition:box-shadow .3s;
 }
+#nav.scrolled { box-shadow:0 4px 24px rgba(11,42,91,0.1); }
 #nav .nav-inner {
   max-width:1160px; margin:0 auto; padding:0 40px;
   height:100%; display:flex; align-items:center; justify-content:space-between;
 }
 .nav-logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
-.nav-logo img { height:46px; width:auto; }
+.nav-logo img { height:44px; width:auto; }
 .nav-logo-text { display:flex; flex-direction:column; line-height:1; }
-.nav-logo-name {
-  font-size:16px; font-weight:800; color:#fff;
+.nav-logo-text .name {
+  font-size:14px; font-weight:800; color:var(--ink);
   letter-spacing:2.5px; text-transform:uppercase;
 }
-.nav-logo-sub {
+.nav-logo-text .tagline {
   font-size:8px; font-weight:500; color:var(--azure);
   letter-spacing:2px; text-transform:uppercase; margin-top:3px;
 }
-.nav-links { display:flex; gap:32px; list-style:none; }
+
+.nav-center { display:flex; align-items:center; gap:8px; }
+.nav-links { display:flex; gap:4px; list-style:none; }
 .nav-links a {
-  font-size:11px; font-weight:600; letter-spacing:1.2px;
+  font-size:11px; font-weight:600; letter-spacing:1px;
   text-transform:uppercase; text-decoration:none;
-  color:rgba(255,255,255,0.7); transition:color .2s;
-  position:relative; padding-bottom:3px;
+  color:var(--ink-60); transition:color .2s;
+  padding:8px 14px; border-radius:4px;
 }
-.nav-links a::after {
-  content:''; position:absolute; bottom:0; left:0;
-  width:0; height:1.5px; background:var(--azure); transition:width .26s;
-}
-.nav-links a:hover { color:#fff; }
-.nav-links a:hover::after { width:100%; }
+.nav-links a:hover { color:var(--ink); background:var(--ink-20); }
+
 .nav-right { display:flex; align-items:center; gap:12px; }
 .nav-explore {
-  font-size:11px; font-weight:600; letter-spacing:1px;
-  text-transform:uppercase; text-decoration:none; color:rgba(255,255,255,0.75);
-  padding:8px 16px; border-radius:4px;
-  border:1px solid rgba(255,255,255,0.2);
-  transition:all .22s;
+  font-size:11px; font-weight:700; letter-spacing:1.5px;
+  text-transform:uppercase; text-decoration:none;
+  color:var(--azure-mid); padding:8px 16px;
+  border:1.5px solid rgba(30,120,200,0.3);
+  border-radius:4px; transition:all .22s;
 }
-.nav-explore:hover { color:#fff; border-color:rgba(255,255,255,0.5); }
+.nav-explore:hover { background:rgba(30,120,200,0.07); border-color:var(--azure-mid); }
 .nav-cta {
   font-size:11px; font-weight:700; letter-spacing:1.5px;
   text-transform:uppercase; text-decoration:none; color:#fff;
-  padding:10px 26px; border-radius:4px;
+  padding:10px 22px; border-radius:4px;
   background:linear-gradient(110deg,var(--azure-mid),var(--azure));
-  box-shadow:0 4px 14px rgba(30,120,200,0.35);
-  transition:all .22s; margin-left:8px;
+  box-shadow:0 3px 14px rgba(30,120,200,0.3);
+  transition:all .22s; margin-left:6px;
 }
-.nav-cta:hover { box-shadow:0 6px 20px rgba(30,120,200,0.5); transform:translateY(-1px); }
+.nav-cta:hover { box-shadow:0 6px 20px rgba(30,120,200,0.45); transform:translateY(-1px); }
 
-/* ─── HAMBURGER ─── */
-.hamburger {
-  display:none; flex-direction:column; justify-content:center;
-  gap:5px; cursor:pointer; padding:6px; background:none; border:none; z-index:1100;
-}
-.hamburger span { display:block; width:22px; height:2px; background:#fff; border-radius:2px; transition:all .3s; }
-.hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
-.hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
-.mobile-nav {
-  display:none; position:fixed; inset:0; z-index:999;
-  background:rgba(11,42,91,0.98); backdrop-filter:blur(16px);
-  flex-direction:column; align-items:center; justify-content:center;
-  gap:4px; opacity:0; pointer-events:none; transition:opacity .3s;
-}
-.mobile-nav.open { opacity:1; pointer-events:all; }
-.mobile-nav a {
-  font-size:22px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
-  color:rgba(255,255,255,0.75); text-decoration:none; padding:14px 0;
-  border-bottom:1px solid rgba(255,255,255,0.08); width:240px; text-align:center; transition:color .2s;
-}
-.mobile-nav a:hover { color:#fff; }
-.mobile-nav a:last-child { border-bottom:none; }
-.mobile-nav-cta {
-  margin-top:20px;
-  background:linear-gradient(110deg,var(--azure-mid),var(--azure)) !important;
-  color:#fff !important; padding:14px 36px !important;
-  border-radius:4px !important; font-size:14px !important;
-  border-bottom:none !important;
-}
-
-/* ─── HERO ─────────────────────────────── */
+/* ─── HERO ─── */
 #hero {
-  min-height:100vh;
-  background:var(--white);
-  position:relative; overflow:hidden;
+  min-height:92vh;
+  background:#fff;
   display:flex; align-items:center;
   padding:100px 0 60px;
+  position:relative; overflow:hidden;
 }
-#hero::before {
-  content:'';
-  position:absolute; inset:0;
-  background:
-    radial-gradient(ellipse 80% 60% at 100% 0%, rgba(47,168,224,0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 0% 100%, rgba(30,120,200,0.05) 0%, transparent 55%);
-  pointer-events:none;
+.hero-bg-shape {
+  position:absolute; right:-80px; top:0; bottom:0;
+  width:52%; background:var(--off);
+  clip-path:polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%);
+  z-index:0;
 }
-/* Subtle dot grid */
-#hero::after {
-  content:'';
-  position:absolute; inset:0;
-  background-image: radial-gradient(circle, rgba(11,42,91,0.06) 1px, transparent 1px);
-  background-size:32px 32px;
-  pointer-events:none; opacity:0.6;
+.hero-bg-dots {
+  position:absolute; right:0; top:0; bottom:0; width:52%;
+  background-image: radial-gradient(rgba(30,120,200,0.08) 1px, transparent 1px);
+  background-size:24px 24px;
+  z-index:0;
 }
+
 .hero-inner {
   position:relative; z-index:2;
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:60px; align-items:center;
   max-width:1160px; margin:0 auto; padding:0 40px; width:100%;
-  display:flex; flex-direction:column; align-items:flex-start;
 }
-.hero-label {
-  display:inline-flex; align-items:center; gap:10px;
+
+.hero-badge {
+  display:inline-flex; align-items:center; gap:8px;
   background:rgba(30,120,200,0.07);
   border:1px solid rgba(30,120,200,0.18);
-  padding:7px 16px 7px 10px; border-radius:3px;
-  font-size:10px; font-weight:700; letter-spacing:2px;
+  padding:6px 14px; border-radius:20px;
+  font-size:10px; font-weight:700; letter-spacing:1.5px;
   text-transform:uppercase; color:var(--azure-mid);
-  margin-bottom:28px;
+  margin-bottom:24px;
 }
-.dot-pulse {
-  width:6px; height:6px; border-radius:50%;
-  background:var(--azure-mid);
-  animation:dpulse 2s ease-in-out infinite;
-}
-@keyframes dpulse {
-  0%,100% { opacity:1; box-shadow:0 0 0 0 rgba(30,120,200,0.4); }
-  50% { opacity:0.6; box-shadow:0 0 0 5px rgba(30,120,200,0); }
-}
+.dot-live { width:6px; height:6px; border-radius:50%; background:#2ECC71; }
+
 .hero-h1 {
   font-family:'Playfair Display',serif;
-  font-size:clamp(38px,5vw,64px);
+  font-size:clamp(36px,4.5vw,58px);
   font-weight:800; line-height:1.08;
-  color:var(--ink); letter-spacing:-1px;
-  margin-bottom:22px; white-space:nowrap;
+  color:var(--ink); letter-spacing:-0.5px;
+  margin-bottom:20px;
 }
 .hero-h1 em {
   font-style:italic; color:var(--azure-mid);
 }
-.hero-sub {
-  font-size:15px; font-weight:400; color:var(--ink-50);
-  line-height:1.8; margin-bottom:36px; max-width:560px;
-}
-.hero-actions { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:52px; }
+.hero-h1 .line-wrap { display:block; white-space:nowrap; }
 
-/* Hero stats bar */
+.hero-sub {
+  font-size:14.5px; color:var(--ink-60);
+  line-height:1.8; margin-bottom:36px; max-width:440px;
+}
+.hero-actions { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:48px; }
+
 .hero-stats {
-  display:flex; gap:0; align-items:stretch;
+  display:flex; gap:0;
   border:1px solid var(--border);
   border-radius:8px; overflow:hidden;
-  background:var(--white);
+  background:#fff;
   box-shadow:var(--shadow-sm);
-  max-width:640px; width:100%;
 }
 .hstat {
-  flex:1; padding:22px 28px; border-right:1px solid var(--border);
-  transition:background .2s;
+  flex:1; padding:20px 22px;
+  border-right:1px solid var(--border);
+  text-align:center;
 }
 .hstat:last-child { border-right:none; }
-.hstat:hover { background:var(--off); }
 .hstat-num {
   font-size:26px; font-weight:900; color:var(--ink);
   letter-spacing:-1px; line-height:1;
 }
-.hstat-num span { color:var(--azure-mid); }
+.hstat-num .s { color:var(--azure-mid); }
 .hstat-lbl {
-  font-size:9.5px; font-weight:700; letter-spacing:1.2px;
-  text-transform:uppercase; color:var(--ink-50);
-  margin-top:5px;
+  font-size:9.5px; font-weight:600; letter-spacing:1px;
+  text-transform:uppercase; color:var(--ink-60); margin-top:5px;
 }
 
-/* ─── SERVICES ─────────────────────────── */
-#services { padding:80px 0; background:var(--off); }
-.section-head {
-  margin-bottom:44px;
+/* Hero right */
+.hero-right-content {
+  display:flex; flex-direction:column; gap:16px;
 }
-.section-head-row {
-  display:flex; align-items:flex-end; justify-content:space-between; gap:40px;
-}
-
-/* Line layout for services */
-.services-list { display:flex; flex-direction:column; gap:0; }
-.svc-line {
-  display:grid; grid-template-columns:56px 1fr auto;
-  gap:0 28px; align-items:start;
-  padding:28px 0; border-bottom:1px solid var(--border);
-  cursor:default; transition:background .2s; border-radius:0;
-  position:relative;
-}
-.svc-line:first-child { border-top:1px solid var(--border); }
-.svc-line:hover { background:var(--white); padding-left:16px; padding-right:16px; margin:0 -16px; border-radius:6px; }
-.svc-line-num {
-  font-size:10px; font-weight:700; letter-spacing:2px;
-  color:rgba(11,42,91,0.22); text-transform:uppercase; padding-top:3px;
-}
-.svc-line-body h3 {
-  font-size:16px; font-weight:700; color:var(--ink); margin-bottom:6px;
-}
-.svc-line-body p { font-size:13px; color:var(--ink-50); line-height:1.72; }
-.svc-line-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
-.svc-tag {
-  font-size:9.5px; font-weight:600; letter-spacing:0.8px;
-  color:var(--azure-mid); background:rgba(30,120,200,0.07);
-  border:1px solid rgba(30,120,200,0.15); padding:3px 10px;
-  border-radius:2px; text-transform:uppercase;
-}
-.svc-line-arrow {
-  width:32px; height:32px; border-radius:50%; border:1.5px solid var(--border);
-  display:flex; align-items:center; justify-content:center; font-size:13px;
-  color:var(--ink-50); transition:all .22s; flex-shrink:0; margin-top:2px;
-}
-.svc-line:hover .svc-line-arrow {
-  border-color:var(--azure); color:var(--azure-mid);
-  background:rgba(47,168,224,0.08); transform:rotate(45deg);
-}
-
-/* ─── APPROACH (4-step, one screen) ──── */
-#approach { padding:80px 0; background:var(--white); }
-.approach-header { text-align:center; margin-bottom:48px; }
-.approach-header .lead { margin:0 auto 0; }
-.approach-cols {
-  display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
-  background:var(--border); border:1px solid var(--border);
-  border-radius:10px; overflow:hidden;
-}
-.astep {
-  background:var(--white); padding:36px 28px;
-  transition:background .25s;
-}
-.astep:hover { background:var(--off); }
-.astep-num-box {
-  width:40px; height:40px; border-radius:8px; margin-bottom:20px;
-  background:linear-gradient(135deg,rgba(47,168,224,0.15),rgba(30,120,200,0.08));
-  display:flex; align-items:center; justify-content:center;
-  font-size:12px; font-weight:800; color:var(--azure-mid); letter-spacing:1px;
-}
-.astep h4 {
-  font-size:15px; font-weight:700; color:var(--ink); margin-bottom:10px;
-}
-.astep p {
-  font-size:12.5px; color:var(--ink-50); line-height:1.75;
-}
-
-/* ─── WHY ──────────────────────────────── */
-#why { padding:80px 0; background:var(--off); }
-.why-layout {
-  display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center;
-}
-.why-list { display:flex; flex-direction:column; gap:24px; margin-top:28px; }
-.why-item { display:flex; gap:16px; align-items:flex-start; }
-.why-icon {
-  width:40px; height:40px; border-radius:8px; flex-shrink:0;
-  background:linear-gradient(135deg,rgba(47,168,224,0.13),rgba(30,120,200,0.07));
-  display:flex; align-items:center; justify-content:center; font-size:17px;
-}
-.why-text h5 {
-  font-size:13.5px; font-weight:700; color:var(--ink); margin-bottom:4px;
-}
-.why-text p { font-size:12.5px; color:var(--ink-50); line-height:1.68; }
-.why-visual {
-  background:var(--ink); border-radius:12px; padding:40px 36px;
-  position:relative; overflow:hidden;
-}
-.why-visual::before {
-  content:''; position:absolute; top:0; right:0;
-  width:220px; height:220px; border-radius:50%;
-  background:radial-gradient(circle,rgba(47,168,224,0.18) 0%,transparent 70%);
-  transform:translate(40%,-40%);
-}
-.why-visual-title {
-  font-size:10px; font-weight:700; letter-spacing:2px;
-  text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:28px;
-}
-.why-stat { margin-bottom:28px; }
-.why-stat:last-child { margin-bottom:0; }
-.why-stat-num {
-  font-size:44px; font-weight:900; color:#fff; line-height:1;
-  letter-spacing:-2px;
-}
-.why-stat-num span { color:var(--azure); }
-.why-stat-lbl {
-  font-size:10px; font-weight:600; letter-spacing:1.5px;
-  text-transform:uppercase; color:rgba(255,255,255,0.4); margin-top:6px;
-}
-.why-divider { height:1px; background:rgba(255,255,255,0.08); margin:20px 0; }
-
-/* ─── TRAINERS ──────────────────────────── */
-#trainers { padding:80px 0; background:var(--white); }
-.trainers-head { margin-bottom:44px; }
-.trainer-grid {
-  display:grid; grid-template-columns:repeat(2,1fr); gap:20px;
-}
-.trainer-card {
-  background:var(--off); border:1px solid var(--border);
-  border-radius:10px; padding:28px 28px 28px 28px;
-  display:flex; gap:20px; align-items:flex-start;
-  transition:box-shadow .25s, transform .25s; position:relative; overflow:hidden;
-}
-.trainer-card::after {
-  content:''; position:absolute; left:0; top:0; bottom:0; width:3px;
-  background:linear-gradient(180deg,var(--azure),var(--azure-mid));
-  opacity:0; transition:opacity .25s;
-}
-.trainer-card:hover { box-shadow:var(--shadow-md); transform:translateY(-3px); }
-.trainer-card:hover::after { opacity:1; }
-.trainer-avatar {
-  width:52px; height:52px; border-radius:10px; flex-shrink:0;
-  background:linear-gradient(135deg,var(--azure-mid),var(--azure));
-  display:flex; align-items:center; justify-content:center;
-  font-size:20px; font-weight:800; color:#fff;
-}
-.trainer-name {
-  font-size:14px; font-weight:700; color:var(--ink); margin-bottom:3px;
-}
-.trainer-title {
-  font-size:10.5px; font-weight:600; letter-spacing:0.8px;
-  text-transform:uppercase; color:var(--azure-mid); margin-bottom:10px;
-}
-.trainer-bio { font-size:12.5px; color:var(--ink-50); line-height:1.7; }
-.trainer-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
-.trainer-tag {
-  font-size:9.5px; font-weight:600; padding:3px 9px; border-radius:2px;
-  background:rgba(30,120,200,0.07); color:var(--azure-mid);
-  border:1px solid rgba(30,120,200,0.15); text-transform:uppercase; letter-spacing:0.5px;
-}
-
-/* ─── TESTIMONIALS ──────────────────────── */
-#testimonials { padding:80px 0; background:var(--off); }
-.testi-head { margin-bottom:44px; }
-.testi-head-row { display:flex; align-items:flex-end; justify-content:space-between; gap:40px; }
-.testi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-.tcard {
-  background:var(--white); border:1px solid var(--border);
-  border-radius:10px; padding:30px; position:relative;
+.hero-feature-card {
+  background:#fff; border:1px solid var(--border);
+  border-radius:10px; padding:22px 26px;
+  box-shadow:var(--shadow-sm);
+  display:flex; align-items:flex-start; gap:16px;
   transition:box-shadow .25s, transform .25s;
 }
-.tcard:hover { box-shadow:var(--shadow-md); transform:translateY(-3px); }
-.tcard-stars { font-size:11px; letter-spacing:2px; color:var(--gold); margin-bottom:14px; }
-.tcard p {
-  font-size:13.5px; color:var(--ink); line-height:1.8;
-  margin-bottom:24px; font-style:italic;
+.hero-feature-card:hover { box-shadow:var(--shadow-md); transform:translateY(-2px); }
+.hfc-icon {
+  width:44px; height:44px; border-radius:8px; flex-shrink:0;
+  background:linear-gradient(135deg,rgba(47,168,224,0.12),rgba(30,120,200,0.06));
+  display:flex; align-items:center; justify-content:center; font-size:20px;
 }
-.tcard-divider { height:1px; background:var(--border); margin-bottom:18px; }
+.hfc-text h4 { font-size:14px; font-weight:700; color:var(--ink); margin-bottom:4px; }
+.hfc-text p { font-size:12.5px; color:var(--ink-60); line-height:1.6; }
+
+/* ─── SERVICES ─── */
+#services { padding:80px 0; background:var(--off); }
+.section-head { margin-bottom:48px; }
+.section-head.center { text-align:center; }
+.section-head.center .eyebrow { justify-content:center; }
+.section-head.center .lead { margin:0 auto; }
+
+/* Line layout for services */
+.services-list { display:flex; flex-direction:column; gap:0; border:1px solid var(--border); border-radius:10px; overflow:hidden; background:#fff; }
+.svc-row {
+  display:grid; grid-template-columns:56px 1fr auto;
+  gap:0; align-items:stretch;
+  border-bottom:1px solid var(--border);
+  transition:background .2s;
+  cursor:default;
+}
+.svc-row:last-child { border-bottom:none; }
+.svc-row:hover { background:var(--off); }
+.svc-row-num {
+  display:flex; align-items:center; justify-content:center;
+  font-size:10px; font-weight:700; letter-spacing:1.5px; color:rgba(11,42,91,0.25);
+  border-right:1px solid var(--border); padding:24px 0; text-align:center;
+  min-width:56px;
+}
+.svc-row-body { padding:24px 28px; display:flex; align-items:center; gap:18px; }
+.svc-row-icon {
+  width:40px; height:40px; border-radius:8px; flex-shrink:0;
+  background:rgba(30,120,200,0.07);
+  display:flex; align-items:center; justify-content:center; font-size:18px;
+}
+.svc-row-text h3 { font-size:15px; font-weight:700; color:var(--ink); margin-bottom:4px; }
+.svc-row-text p { font-size:12.5px; color:var(--ink-60); line-height:1.6; max-width:560px; }
+.svc-row-tags {
+  display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;
+}
+.svc-tag {
+  font-size:9.5px; font-weight:600; letter-spacing:0.5px;
+  color:var(--azure-mid); background:rgba(30,120,200,0.07);
+  border:1px solid rgba(30,120,200,0.15);
+  padding:3px 9px; border-radius:3px; text-transform:uppercase;
+}
+.svc-row-arrow {
+  display:flex; align-items:center; padding:0 28px;
+  font-size:18px; color:rgba(11,42,91,0.2);
+  border-left:1px solid var(--border);
+  transition:color .2s;
+}
+.svc-row:hover .svc-row-arrow { color:var(--azure-mid); }
+
+/* ─── APPROACH ─── (all steps visible, compact) */
+#approach { padding:80px 0; background:#fff; }
+.approach-layout {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:64px; align-items:start;
+}
+.approach-steps-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:20px;
+}
+.astep-card {
+  background:var(--off); border:1px solid var(--border);
+  border-radius:10px; padding:28px 24px;
+  transition:box-shadow .25s, transform .25s;
+}
+.astep-card:hover { box-shadow:var(--shadow-md); transform:translateY(-3px); }
+.astep-card-num {
+  font-size:11px; font-weight:800; letter-spacing:1.5px;
+  color:var(--azure-mid); text-transform:uppercase; margin-bottom:12px;
+}
+.astep-card h4 { font-size:15px; font-weight:700; color:var(--ink); margin-bottom:8px; }
+.astep-card p { font-size:12.5px; color:var(--ink-60); line-height:1.7; }
+
+/* ─── WHY ─── */
+#why { padding:80px 0; background:var(--off); }
+.why-layout {
+  display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;
+}
+.why-features { display:flex; flex-direction:column; gap:20px; }
+.why-feat {
+  display:flex; gap:16px; align-items:flex-start;
+  background:#fff; border:1px solid var(--border);
+  border-radius:10px; padding:20px 22px;
+  transition:box-shadow .22s;
+}
+.why-feat:hover { box-shadow:var(--shadow-sm); }
+.why-feat-icon {
+  width:40px; height:40px; border-radius:8px; flex-shrink:0;
+  background:linear-gradient(135deg,var(--azure),var(--azure-mid));
+  display:flex; align-items:center; justify-content:center; font-size:17px;
+}
+.why-feat h5 { font-size:13.5px; font-weight:700; color:var(--ink); margin-bottom:4px; }
+.why-feat p { font-size:12px; color:var(--ink-60); line-height:1.6; }
+
+/* ─── TESTIMONIALS ─── */
+#testimonials { padding:80px 0; background:#fff; }
+.testi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.tcard {
+  background:var(--off); border:1px solid var(--border);
+  border-radius:10px; padding:28px; position:relative;
+  transition:box-shadow .3s, transform .3s;
+}
+.tcard:hover { box-shadow:var(--shadow-md); transform:translateY(-3px); }
+.tcard-quote { font-size:44px; line-height:1; color:var(--azure); font-family:Georgia,serif; opacity:.2; margin-bottom:2px; }
+.tcard p { font-size:13.5px; color:var(--ink); line-height:1.75; margin-bottom:22px; font-style:italic; }
+.tcard-divider { height:1px; background:var(--border); margin-bottom:16px; }
 .tcard-author { display:flex; align-items:center; gap:12px; }
 .tcard-avatar {
   width:38px; height:38px; border-radius:50%;
@@ -443,228 +353,243 @@ h2.display em { font-style:italic; color:var(--azure-mid); }
   font-size:12px; font-weight:700; color:#fff; flex-shrink:0;
 }
 .tcard-name { font-size:12.5px; font-weight:700; color:var(--ink); }
-.tcard-role { font-size:10.5px; color:var(--ink-50); margin-top:2px; }
+.tcard-role { font-size:11px; color:var(--ink-60); margin-top:2px; }
 
-/* ─── IMPACT (bottom) ────────────────── */
-#impact { padding:80px 0; background:var(--ink); position:relative; overflow:hidden; }
-#impact::before {
-  content:''; position:absolute; inset:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size:64px 64px;
-}
+/* ─── IMPACT (bottom) ─── */
+#impact { padding:80px 0; background:var(--ink); }
 #impact .container { position:relative; z-index:1; }
 .impact-inner {
-  display:grid; grid-template-columns:1fr 3fr; gap:72px; align-items:center;
+  display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;
 }
 .impact-left .eyebrow { color:var(--azure); }
-.impact-left .eyebrow::before { background:linear-gradient(90deg,var(--azure),var(--azure-mid)); }
+.impact-left .eyebrow::before { background:var(--azure); }
 .impact-left h2.display { color:#fff; }
 .impact-left h2.display em { color:var(--azure); -webkit-text-fill-color:unset; background:none; }
-.impact-left .lead { color:rgba(255,255,255,0.45); }
+.impact-left .lead { color:rgba(255,255,255,0.5); max-width:420px; }
 .impact-grid {
-  display:grid; grid-template-columns:repeat(2,1fr); gap:1px;
-  background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.06);
-  border-radius:8px; overflow:hidden;
+  display:grid; grid-template-columns:1fr 1fr; gap:2px;
+  background:rgba(255,255,255,0.06); border-radius:8px; overflow:hidden;
+  border:1px solid rgba(255,255,255,0.08);
 }
 .icard {
-  padding:36px 28px; background:rgba(255,255,255,0.02);
-  text-align:center; transition:background .25s;
+  padding:32px 28px; background:rgba(255,255,255,0.03);
+  text-align:center; transition:background .3s;
 }
-.icard:hover { background:rgba(47,168,224,0.08); }
-.icard-icon { font-size:26px; margin-bottom:14px; display:block; }
+.icard:hover { background:rgba(47,168,224,0.1); }
+.icard-icon { font-size:24px; margin-bottom:12px; display:block; }
 .icard-num {
-  font-size:46px; font-weight:900; color:#fff;
-  letter-spacing:-2px; line-height:1; font-variant-numeric:tabular-nums;
+  font-size:40px; font-weight:900; color:#fff;
+  letter-spacing:-2px; line-height:1;
 }
 .icard-num .s { color:var(--azure); }
 .icard-label {
-  font-size:9.5px; font-weight:700; letter-spacing:2px;
-  text-transform:uppercase; color:rgba(255,255,255,0.35); margin-top:10px;
+  font-size:9px; font-weight:700; letter-spacing:2px;
+  text-transform:uppercase; color:rgba(255,255,255,0.35); margin-top:8px;
 }
-.icard-sub { font-size:11.5px; color:rgba(255,255,255,0.25); margin-top:4px; line-height:1.5; }
 
-/* ─── CONTACT ──────────────────────────── */
-#contact {
-  padding:80px 0; background:var(--ink); position:relative; overflow:hidden;
-  border-top:1px solid rgba(255,255,255,0.06);
+/* ─── TRAINERS ─── */
+#trainers { padding:80px 0; background:var(--off); }
+.cred-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+.ccard {
+  background:#fff; border:1px solid var(--border);
+  border-radius:10px; padding:28px 20px; text-align:center;
+  transition:all .28s; position:relative; overflow:hidden;
 }
-#contact::before {
-  content:''; position:absolute; inset:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size:48px 48px;
+.ccard::before {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,var(--azure-mid),var(--azure));
+  transform:scaleX(0); transition:transform .3s;
 }
-#contact .container { position:relative; z-index:1; }
+.ccard:hover { box-shadow:var(--shadow-md); transform:translateY(-3px); }
+.ccard:hover::before { transform:scaleX(1); }
+.ccard-icon { font-size:28px; margin-bottom:12px; display:block; }
+.ccard h4 { font-size:13px; font-weight:700; color:var(--ink); margin-bottom:8px; }
+.ccard p { font-size:12px; color:var(--ink-60); line-height:1.65; }
+
+/* ─── CONTACT ─── */
+#contact { padding:80px 0; background:#fff; }
 .contact-layout {
   display:grid; grid-template-columns:5fr 7fr; gap:72px; align-items:start;
 }
-.contact-left .eyebrow { color:var(--azure); }
-.contact-left .eyebrow::before { background:linear-gradient(90deg,var(--azure),var(--azure-mid)); }
-.contact-left h2.display { color:#fff; }
-.contact-left h2.display em { color:var(--azure); -webkit-text-fill-color:unset; background:none; }
-.contact-left .lead { color:rgba(255,255,255,0.45); margin-bottom:36px; }
-.cinfo { display:flex; flex-direction:column; gap:16px; margin-bottom:32px; }
+.contact-left h2.display { margin-bottom:14px; }
+.contact-left .lead { margin-bottom:36px; }
+.cinfo { display:flex; flex-direction:column; gap:16px; margin-bottom:36px; }
 .cinfo-row { display:flex; align-items:center; gap:14px; }
 .cinfo-icon {
   width:40px; height:40px; border-radius:8px; flex-shrink:0;
-  background:rgba(47,168,224,0.1); border:1px solid rgba(47,168,224,0.18);
-  display:flex; align-items:center; justify-content:center; font-size:15px;
+  background:rgba(30,120,200,0.07);
+  border:1px solid rgba(30,120,200,0.15);
+  display:flex; align-items:center; justify-content:center; font-size:16px;
 }
 .cinfo-label {
   font-size:9px; font-weight:700; letter-spacing:1.5px;
-  text-transform:uppercase; color:rgba(255,255,255,0.3);
+  text-transform:uppercase; color:var(--ink-60);
 }
-.cinfo-val { font-size:13px; font-weight:500; color:rgba(255,255,255,0.8); margin-top:2px; }
-.social-row { display:flex; gap:10px; margin-top:8px; }
-.soc-btn {
-  display:flex; align-items:center; gap:8px;
-  padding:9px 16px; border-radius:5px;
-  background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);
-  color:rgba(255,255,255,0.65); font-size:10.5px; font-weight:600;
-  letter-spacing:0.5px; text-decoration:none; transition:all .2s;
+.cinfo-val { font-size:13px; font-weight:500; color:var(--ink); margin-top:2px; }
+.cinfo-val a { color:var(--ink); text-decoration:none; }
+.cinfo-val a:hover { color:var(--azure-mid); }
+
+.social-row { display:flex; gap:10px; margin-top:4px; }
+.soc-link {
+  width:36px; height:36px; border-radius:7px;
+  background:var(--off); border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px; text-decoration:none;
+  transition:all .22s; cursor:pointer;
 }
-.soc-btn:hover { background:rgba(47,168,224,0.15); border-color:rgba(47,168,224,0.35); color:#fff; }
-.soc-btn svg { flex-shrink:0; }
+.soc-link:hover { background:rgba(30,120,200,0.08); border-color:var(--azure-mid); }
+
 .contact-form-wrap {
-  background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1);
-  border-radius:12px; padding:40px; backdrop-filter:blur(12px);
+  background:var(--off); border:1px solid var(--border);
+  border-radius:12px; padding:40px;
 }
 .form-row2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-.fg { margin-bottom:18px; }
+.fg { margin-bottom:16px; }
 .fg label {
-  display:block; font-size:9px; font-weight:700; letter-spacing:1.5px;
-  text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:7px;
+  display:block; font-size:9px; font-weight:700;
+  letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--ink-60); margin-bottom:7px;
 }
 .fg input, .fg textarea, .fg select {
-  width:100%; padding:12px 15px;
-  background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12);
-  border-radius:4px; color:#fff; font-family:'Montserrat',sans-serif;
-  font-size:13px; outline:none; transition:all .2s; appearance:none;
+  width:100%; padding:11px 14px;
+  background:#fff; border:1px solid var(--border);
+  border-radius:4px; color:var(--ink);
+  font-family:'Montserrat',sans-serif; font-size:13px;
+  outline:none; transition:all .2s; appearance:none;
 }
-.fg input::placeholder, .fg textarea::placeholder { color:rgba(255,255,255,0.2); }
 .fg input:focus, .fg textarea:focus, .fg select:focus {
-  border-color:var(--azure); background:rgba(47,168,224,0.07);
-  box-shadow:0 0 0 3px rgba(47,168,224,0.1);
+  border-color:var(--azure-mid);
+  box-shadow:0 0 0 3px rgba(30,120,200,0.1);
 }
 .fg textarea { resize:vertical; min-height:100px; line-height:1.6; }
 .fg select { cursor:pointer; }
-.fg select option { background:var(--ink); }
 .submit-btn {
-  width:100%; padding:15px;
+  width:100%; padding:14px;
   background:linear-gradient(110deg,var(--azure-mid),var(--azure));
-  border:none; border-radius:4px; font-family:'Montserrat',sans-serif;
-  font-size:11px; font-weight:700; letter-spacing:2px; color:#fff;
-  text-transform:uppercase; cursor:pointer;
-  box-shadow:0 6px 24px rgba(30,120,200,0.38); transition:all .22s;
-  display:flex; align-items:center; justify-content:center; gap:8px;
+  border:none; border-radius:4px;
+  font-family:'Montserrat',sans-serif;
+  font-size:11px; font-weight:700; letter-spacing:2px;
+  color:#fff; text-transform:uppercase; cursor:pointer;
+  box-shadow:0 6px 22px rgba(30,120,200,0.3);
+  transition:all .22s; display:flex; align-items:center; justify-content:center; gap:8px;
 }
-.submit-btn:hover { box-shadow:0 10px 30px rgba(30,120,200,0.52); transform:translateY(-2px); }
+.submit-btn:hover { box-shadow:0 10px 30px rgba(30,120,200,0.45); transform:translateY(-2px); }
 
-/* ─── FOOTER ────────────────────────────── */
-footer { background:#071B3B; border-top:1px solid rgba(47,168,224,0.12); }
-.footer-main { padding:52px 0 36px; }
+/* ─── FOOTER ─── */
+footer { background:#071B3B; border-top:1px solid rgba(47,168,224,0.15); }
+.footer-main { padding:52px 0 40px; }
 .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px; }
-.footer-brand p {
-  font-size:12px; color:rgba(255,255,255,0.35);
-  line-height:1.75; max-width:250px; margin-bottom:0; margin-top:14px;
-}
-.footer-social { display:flex; gap:10px; margin-top:18px; }
+.footer-brand .nav-logo { margin-bottom:14px; }
+.footer-brand p { font-size:12px; color:rgba(255,255,255,0.38); line-height:1.7; max-width:240px; margin-bottom:20px; }
+.footer-social { display:flex; gap:8px; }
 .fsoc {
   width:32px; height:32px; border-radius:6px;
-  background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);
-  display:flex; align-items:center; justify-content:center; font-size:12px;
-  transition:all .2s; cursor:pointer; text-decoration:none;
+  background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; transition:all .2s; cursor:pointer; text-decoration:none;
 }
 .fsoc:hover { background:rgba(47,168,224,0.15); border-color:rgba(47,168,224,0.3); }
 .footer-col h5 {
   font-size:9.5px; font-weight:700; letter-spacing:2.5px;
-  text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:16px;
+  text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:16px;
 }
 .footer-col ul { list-style:none; }
 .footer-col li { margin-bottom:9px; }
-.footer-col a { font-size:12.5px; color:rgba(255,255,255,0.45); text-decoration:none; transition:color .2s; }
+.footer-col a { font-size:12.5px; color:rgba(255,255,255,0.5); text-decoration:none; transition:color .2s; }
 .footer-col a:hover { color:var(--azure); }
-.footer-bottom {
-  border-top:1px solid rgba(255,255,255,0.06); padding:18px 0;
-}
-.footer-bottom .container {
-  display:flex; justify-content:space-between; align-items:center;
-  font-size:11px; color:rgba(255,255,255,0.25);
-}
+.footer-bottom { border-top:1px solid rgba(255,255,255,0.07); padding:20px 0; }
+.footer-bottom .container { display:flex; justify-content:space-between; align-items:center; font-size:11px; color:rgba(255,255,255,0.28); }
 .footer-bottom strong { color:rgba(255,255,255,0.5); font-weight:600; }
 
-/* ─── SCROLL REVEAL ──────────────────── */
+/* ─── SCROLL REVEAL ─── */
 .sr { opacity:0; transform:translateY(22px); transition:opacity .65s cubic-bezier(.22,.61,.36,1), transform .65s cubic-bezier(.22,.61,.36,1); }
 .sr.visible { opacity:1; transform:none; }
-.sr-delay-1 { transition-delay:.08s; }
-.sr-delay-2 { transition-delay:.16s; }
-.sr-delay-3 { transition-delay:.24s; }
-.sr-delay-4 { transition-delay:.32s; }
+.sr-delay-1 { transition-delay:.1s; }
+.sr-delay-2 { transition-delay:.2s; }
+.sr-delay-3 { transition-delay:.3s; }
+.sr-delay-4 { transition-delay:.4s; }
 
-/* ─── RESPONSIVE ──────────────────────── */
+/* ─── HAMBURGER / MOBILE ─── */
+.hamburger { display:none; flex-direction:column; justify-content:center; gap:5px; cursor:pointer; padding:6px; background:none; border:none; z-index:1100; }
+.hamburger span { display:block; width:22px; height:2px; background:var(--ink); border-radius:2px; transition:all .3s; }
+.hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity:0; }
+.hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+.mobile-nav { display:none; position:fixed; inset:0; z-index:999; background:rgba(255,255,255,0.98); backdrop-filter:blur(16px); flex-direction:column; align-items:center; justify-content:center; gap:4px; opacity:0; pointer-events:none; transition:opacity .3s; }
+.mobile-nav.open { opacity:1; pointer-events:all; }
+.mobile-nav a { font-size:22px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--ink-60); text-decoration:none; padding:14px 0; transition:color .2s; border-bottom:1px solid var(--border); width:220px; text-align:center; }
+.mobile-nav a:hover { color:var(--ink); }
+.mobile-nav a:last-child { border-bottom:none; }
+.mobile-nav-cta { margin-top:20px; background:linear-gradient(110deg,var(--azure-mid),var(--azure)) !important; color:#fff !important; padding:12px 32px !important; border-radius:4px !important; font-size:14px !important; box-shadow:0 4px 18px rgba(30,120,200,0.35); border-bottom:none !important; }
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1000px) {
+  .hero-inner { gap:40px; }
+  .approach-layout { grid-template-columns:1fr; gap:40px; }
+  .why-layout { grid-template-columns:1fr; gap:40px; }
+  .impact-inner { grid-template-columns:1fr; gap:40px; }
+}
+
 @media(max-width:960px) {
   .container { padding:0 28px; }
-  .nav-links, .nav-cta, .nav-explore { display:none; }
+  .nav-links, .nav-explore, .nav-cta { display:none; }
   .hamburger { display:flex; }
   .mobile-nav { display:flex; }
-  .hero-h1 { white-space:normal; font-size:clamp(32px,6vw,48px); }
-  .hero-stats { max-width:100%; }
-  .approach-cols { grid-template-columns:1fr 1fr; }
-  .why-layout { grid-template-columns:1fr; }
-  .trainer-grid { grid-template-columns:1fr; }
+  .hero-inner { grid-template-columns:1fr; }
+  .hero-right-content { display:none; }
   .testi-grid { grid-template-columns:1fr 1fr; }
-  .impact-inner { grid-template-columns:1fr; gap:40px; }
-  .impact-grid { grid-template-columns:1fr 1fr; }
-  .contact-layout { grid-template-columns:1fr; }
+  .cred-grid { grid-template-columns:1fr 1fr; }
+  .contact-layout { grid-template-columns:1fr; gap:40px; }
   .footer-grid { grid-template-columns:1fr 1fr; gap:28px; }
-  .section-head-row { flex-direction:column; align-items:flex-start; gap:20px; }
+  .approach-steps-grid { grid-template-columns:1fr; }
 }
+
 @media(max-width:640px) {
-  .container { padding:0 20px; }
-  #nav .nav-inner { padding:0 20px; }
-  .nav-logo img { height:36px; }
-  .hero-h1 { font-size:clamp(28px,8vw,38px); letter-spacing:-0.5px; }
-  .hero-stats { flex-direction:column; }
-  .hstat { border-right:none; border-bottom:1px solid var(--border); }
-  .hstat:last-child { border-bottom:none; }
-  .approach-cols { grid-template-columns:1fr; }
+  .container { padding:0 18px; }
+  #nav .nav-inner { padding:0 18px; }
+  .hero-h1 { font-size:clamp(30px,8vw,40px); }
+  .hero-actions { flex-direction:column; }
+  .hero-actions .btn { justify-content:center; }
+  .hero-stats { flex-wrap:wrap; }
+  .hstat { flex:1 1 45%; border-bottom:1px solid var(--border); }
   .testi-grid { grid-template-columns:1fr; }
-  .impact-grid { grid-template-columns:1fr; }
+  .cred-grid { grid-template-columns:1fr 1fr; gap:12px; }
   .footer-grid { grid-template-columns:1fr; }
   .footer-bottom .container { flex-direction:column; gap:6px; text-align:center; }
   .form-row2 { grid-template-columns:1fr; }
-  .social-row { flex-wrap:wrap; }
-  .contact-form-wrap { padding:24px 20px; }
+  .svc-row { grid-template-columns:40px 1fr auto; }
+  .impact-grid { grid-template-columns:1fr 1fr; }
   h2.display { font-size:clamp(24px,7vw,34px); }
-  .trainer-grid { grid-template-columns:1fr; }
+  .approach-steps-grid { grid-template-columns:1fr; }
 }
 </style>
 </head>
 <body>
 
-<!-- ═══ NAV ══════════════════════════ -->
+<!-- ═══ NAV ═══════════════════════════════════════ -->
 <nav id="nav">
   <div class="nav-inner">
     <a href="#hero" class="nav-logo">
       <img src="logo.png" alt="Skillbridg Logo"/>
       <div class="nav-logo-text">
-        <span class="nav-logo-name">SKILLBRIDG</span>
-        <span class="nav-logo-sub">Learning Redefined</span>
+        <span class="name">SKILLBRIDG</span>
+        <span class="tagline">Learning Redefined</span>
       </div>
     </a>
-    <ul class="nav-links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#approach">Approach</a></li>
-      <li><a href="#trainers">Trainers</a></li>
-      <li><a href="#testimonials">Clients</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+
+    <div class="nav-center">
+      <ul class="nav-links">
+        <li><a href="#hero">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#trainers">Trainers</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
     <div class="nav-right">
       <a href="#services" class="nav-explore">Explore Services</a>
-      <a href="#contact" class="nav-cta">Partner With Us</a>
+      <a href="#contact" class="nav-cta">Partner With Us &nbsp;→</a>
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -674,281 +599,258 @@ footer { background:#071B3B; border-top:1px solid rgba(47,168,224,0.12); }
 
 <!-- Mobile Nav -->
 <div class="mobile-nav" id="mobileNav">
+  <a href="#hero" onclick="closeMobileNav()">About</a>
   <a href="#services" onclick="closeMobileNav()">Services</a>
   <a href="#approach" onclick="closeMobileNav()">Approach</a>
   <a href="#trainers" onclick="closeMobileNav()">Trainers</a>
-  <a href="#testimonials" onclick="closeMobileNav()">Clients</a>
   <a href="#contact" onclick="closeMobileNav()">Contact</a>
   <a href="#contact" class="mobile-nav-cta" onclick="closeMobileNav()">Partner With Us</a>
 </div>
 
-<!-- ═══ HERO ══════════════════════════ -->
+<!-- ═══ HERO ══════════════════════════════════════ -->
 <section id="hero">
+  <div class="hero-bg-shape"></div>
+  <div class="hero-bg-dots"></div>
   <div class="hero-inner">
-    <div class="hero-label sr">
-      <span class="dot-pulse"></span>
-      Chennai's Premier Corporate Training Academy
+    <!-- Left -->
+    <div>
+      <div class="hero-badge">
+        <span class="dot-live"></span>
+        Chennai's Premier Corporate Training Academy
+      </div>
+      <h1 class="hero-h1">
+        <span class="line-wrap">Transform Your Workforce.</span>
+        <em>Redefine Learning.</em>
+      </h1>
+      <p class="hero-sub">
+        Skillbridg Learning Academy partners with corporates, institutions, and startups across Chennai and South India to build leadership capability, employability skills, and high-performance cultures.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Partner With Us <span class="arrow">→</span></a>
+        <a href="#services" class="btn btn-outline-dark">Explore Services</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat">
+          <div class="hstat-num">12<span class="s">+</span></div>
+          <div class="hstat-lbl">Years Experience</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-num">500<span class="s">+</span></div>
+          <div class="hstat-lbl">Corporates Trained</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-num">50<span class="s">K+</span></div>
+          <div class="hstat-lbl">Professionals Impacted</div>
+        </div>
+      </div>
     </div>
-    <h1 class="hero-h1 sr sr-delay-1">
-      Transform Your Workforce. <em>Redefine Learning.</em>
-    </h1>
-    <p class="hero-sub sr sr-delay-2">
-      Skillbridg Learning Academy partners with corporates, institutions, and startups across Chennai and South India to build leadership capability, employability skills, and high-performance cultures.
-    </p>
-    <div class="hero-actions sr sr-delay-3">
-      <a href="#contact" class="btn btn-primary">Partner With Us <span class="arrow">→</span></a>
-    </div>
-    <div class="hero-stats sr sr-delay-4">
-      <div class="hstat">
-        <div class="hstat-num">12<span>+</span></div>
-        <div class="hstat-lbl">Years Experience</div>
+
+    <!-- Right -->
+    <div class="hero-right-content sr sr-delay-2">
+      <div class="hero-feature-card">
+        <div class="hfc-icon">🏆</div>
+        <div class="hfc-text">
+          <h4>Expert Facilitators</h4>
+          <p>Trainers with 12+ years of corporate leadership experience delivering impactful, customized programs.</p>
+        </div>
       </div>
-      <div class="hstat">
-        <div class="hstat-num">500<span>+</span></div>
-        <div class="hstat-lbl">Corporates Trained</div>
+      <div class="hero-feature-card">
+        <div class="hfc-icon">🎯</div>
+        <div class="hfc-text">
+          <h4>Customized Learning Journeys</h4>
+          <p>Programs built around your culture, industry, and strategic objectives — never off-the-shelf.</p>
+        </div>
       </div>
-      <div class="hstat">
-        <div class="hstat-num">50<span>K+</span></div>
-        <div class="hstat-lbl">Professionals Impacted</div>
+      <div class="hero-feature-card">
+        <div class="hfc-icon">📈</div>
+        <div class="hfc-text">
+          <h4>ROI-Driven Solutions</h4>
+          <p>Measurable outcomes tied directly to your business goals, tracked through post-program evaluation.</p>
+        </div>
       </div>
-      <div class="hstat">
-        <div class="hstat-num">4<span>+</span></div>
-        <div class="hstat-lbl">Industries Served</div>
+      <div class="hero-feature-card">
+        <div class="hfc-icon">🌏</div>
+        <div class="hfc-text">
+          <h4>Chennai & South India Focus</h4>
+          <p>Deep local expertise across Chennai, Bangalore, Hyderabad, Kochi, and surrounding regions.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ SERVICES ══════════════════════ -->
+<!-- ═══ SERVICES ══════════════════════════════════ -->
 <section id="services">
   <div class="container">
-    <div class="section-head">
-      <div class="section-head-row">
-        <div class="sr">
-          <div class="eyebrow">What We Do</div>
-          <h2 class="display">Training <em>Solutions</em></h2>
-        </div>
-        <p class="lead sr sr-delay-2" style="max-width:420px;">Tailored programs built to transform your workforce and drive measurable organizational excellence across Chennai and South India.</p>
+    <div class="section-head sr" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:40px;">
+      <div>
+        <div class="eyebrow">What We Do</div>
+        <h2 class="display" style="margin-bottom:0;">Comprehensive <em>Training Solutions</em></h2>
       </div>
+      <p class="lead" style="max-width:380px;">Tailored programs designed to transform your workforce and drive measurable organizational excellence.</p>
     </div>
-    <div class="services-list sr">
-      <div class="svc-line">
-        <div class="svc-line-num">01</div>
-        <div class="svc-line-body">
-          <h3>Corporate Training</h3>
-          <p>Communication, emotional intelligence, professional effectiveness, and collaboration programs designed for measurable impact across your organization.</p>
-          <div class="svc-line-tags">
-            <span class="svc-tag">Soft Skills</span>
-            <span class="svc-tag">Team Building</span>
-            <span class="svc-tag">Workplace Communication</span>
+
+    <div class="services-list sr sr-delay-1">
+      <div class="svc-row">
+        <div class="svc-row-num">01</div>
+        <div class="svc-row-body">
+          <div class="svc-row-icon">🏢</div>
+          <div class="svc-row-text">
+            <h3>Corporate Training</h3>
+            <p>Communication, emotional intelligence, professional effectiveness, and collaboration programs designed for measurable organizational impact.</p>
+            <div class="svc-row-tags">
+              <span class="svc-tag">Soft Skills</span>
+              <span class="svc-tag">Team Building</span>
+              <span class="svc-tag">Workplace Communication</span>
+            </div>
           </div>
         </div>
-        <div class="svc-line-arrow">↗</div>
+        <div class="svc-row-arrow">→</div>
       </div>
-      <div class="svc-line">
-        <div class="svc-line-num">02</div>
-        <div class="svc-line-body">
-          <h3>Leadership Development</h3>
-          <p>First-time manager programs, leadership journeys, and executive coaching for sustainable growth and organizational capability at every tier.</p>
-          <div class="svc-line-tags">
-            <span class="svc-tag">Executive Coaching</span>
-            <span class="svc-tag">Manager Training</span>
-            <span class="svc-tag">Leadership Journeys</span>
+      <div class="svc-row">
+        <div class="svc-row-num">02</div>
+        <div class="svc-row-body">
+          <div class="svc-row-icon">🚀</div>
+          <div class="svc-row-text">
+            <h3>Leadership Development</h3>
+            <p>First-time manager programs, leadership journeys, and executive coaching for sustainable growth and organizational capability at every tier.</p>
+            <div class="svc-row-tags">
+              <span class="svc-tag">Executive Coaching</span>
+              <span class="svc-tag">Manager Training</span>
+              <span class="svc-tag">Leadership Journeys</span>
+            </div>
           </div>
         </div>
-        <div class="svc-line-arrow">↗</div>
+        <div class="svc-row-arrow">→</div>
       </div>
-      <div class="svc-line">
-        <div class="svc-line-num">03</div>
-        <div class="svc-line-body">
-          <h3>Sales & Customer Excellence</h3>
-          <p>Sales effectiveness, customer-centricity, and service excellence programs that drive revenue growth and build lasting customer loyalty.</p>
-          <div class="svc-line-tags">
-            <span class="svc-tag">Sales Training</span>
-            <span class="svc-tag">Customer Service</span>
-            <span class="svc-tag">Pre-Sales Consulting</span>
+      <div class="svc-row">
+        <div class="svc-row-num">03</div>
+        <div class="svc-row-body">
+          <div class="svc-row-icon">📈</div>
+          <div class="svc-row-text">
+            <h3>Sales & Customer Excellence</h3>
+            <p>Sales effectiveness, customer-centricity, and service excellence programs that drive revenue growth and build lasting customer relationships.</p>
+            <div class="svc-row-tags">
+              <span class="svc-tag">Sales Training</span>
+              <span class="svc-tag">Customer Service</span>
+              <span class="svc-tag">Pre-Sales Consulting</span>
+            </div>
           </div>
         </div>
-        <div class="svc-line-arrow">↗</div>
+        <div class="svc-row-arrow">→</div>
       </div>
-      <div class="svc-line">
-        <div class="svc-line-num">04</div>
-        <div class="svc-line-body">
-          <h3>Academic & Employability</h3>
-          <p>Campus-to-corporate readiness, interview preparation, and employability skill development programs for students and fresh graduates across South India.</p>
-          <div class="svc-line-tags">
-            <span class="svc-tag">Campus Training</span>
-            <span class="svc-tag">Interview Prep</span>
-            <span class="svc-tag">Career Readiness</span>
-            <span class="svc-tag">Content Ready Programs</span>
+      <div class="svc-row">
+        <div class="svc-row-num">04</div>
+        <div class="svc-row-body">
+          <div class="svc-row-icon">🎓</div>
+          <div class="svc-row-text">
+            <h3>Academic & Employability</h3>
+            <p>Campus-to-corporate readiness, interview preparation, and employability skill development for students and fresh graduates entering the workforce.</p>
+            <div class="svc-row-tags">
+              <span class="svc-tag">Campus Training</span>
+              <span class="svc-tag">Interview Prep</span>
+              <span class="svc-tag">Career Readiness</span>
+            </div>
           </div>
         </div>
-        <div class="svc-line-arrow">↗</div>
+        <div class="svc-row-arrow">→</div>
+      </div>
+      <div class="svc-row">
+        <div class="svc-row-num">05</div>
+        <div class="svc-row-body">
+          <div class="svc-row-icon">📦</div>
+          <div class="svc-row-text">
+            <h3>Content Ready Programs</h3>
+            <p>Ready-to-deploy training modules on high-demand topics — quickly customized and rolled out with minimal lead time for your teams.</p>
+            <div class="svc-row-tags">
+              <span class="svc-tag">Ready Modules</span>
+              <span class="svc-tag">Quick Deploy</span>
+              <span class="svc-tag">Custom Branding</span>
+            </div>
+          </div>
+        </div>
+        <div class="svc-row-arrow">→</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ APPROACH ══════════════════════ -->
+<!-- ═══ APPROACH ══════════════════════════════════ -->
 <section id="approach">
   <div class="container">
-    <div class="approach-header sr">
-      <div class="eyebrow" style="justify-content:center;">Our Methodology</div>
-      <h2 class="display">A Proven <em>Four-Step</em> Framework</h2>
-      <p class="lead">A disciplined process that goes beyond content delivery to create genuine behavior change and lasting organizational performance.</p>
-    </div>
-    <div class="approach-cols sr sr-delay-1">
-      <div class="astep">
-        <div class="astep-num-box">01</div>
-        <h4>Understand</h4>
-        <p>Deep diagnosis through conversations with leaders, analysis of business goals, and a clear picture of your people and performance challenges before any design begins.</p>
+    <div class="approach-layout">
+      <div class="sr">
+        <div class="eyebrow">Our Methodology</div>
+        <h2 class="display">A Proven <em>Four-Step</em> Framework</h2>
+        <p class="lead" style="margin-bottom:28px;">A disciplined process that goes beyond content delivery to create genuine behavior change and lasting organizational performance.</p>
+        <a href="#contact" class="btn btn-primary">Start the Conversation <span class="arrow">→</span></a>
       </div>
-      <div class="astep">
-        <div class="astep-num-box">02</div>
-        <h4>Design</h4>
-        <p>Fully customized learning journeys built around your culture, industry context, and strategic objectives — not off-the-shelf content repurposed for your context.</p>
-      </div>
-      <div class="astep">
-        <div class="astep-num-box">03</div>
-        <h4>Deliver</h4>
-        <p>Engaging, experiential learning facilitated by industry veterans — simulations, case studies, role plays, and real-world application embedded throughout every session.</p>
-      </div>
-      <div class="astep">
-        <div class="astep-num-box">04</div>
-        <h4>Sustain</h4>
-        <p>Post-program reinforcement through coaching check-ins, manager toolkits, and follow-through sessions to ensure new behaviors stick and ROI is realized long-term.</p>
+      <div class="approach-steps-grid sr sr-delay-2">
+        <div class="astep-card">
+          <div class="astep-card-num">Step 01</div>
+          <h4>Understand</h4>
+          <p>Deep diagnosis — conversations with leaders, analysis of business goals, and a clear picture of your people and performance challenges before any design begins.</p>
+        </div>
+        <div class="astep-card">
+          <div class="astep-card-num">Step 02</div>
+          <h4>Design</h4>
+          <p>Fully customized learning journeys built around your culture, industry context, and strategic objectives — never off-the-shelf content.</p>
+        </div>
+        <div class="astep-card">
+          <div class="astep-card-num">Step 03</div>
+          <h4>Deliver</h4>
+          <p>Engaging, experiential learning facilitated by industry veterans — simulations, case studies, role plays, and real-world application throughout.</p>
+        </div>
+        <div class="astep-card">
+          <div class="astep-card-num">Step 04</div>
+          <h4>Sustain</h4>
+          <p>Post-program reinforcement through coaching check-ins, manager toolkits, and follow-through sessions that ensure new behaviors stick long-term.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ WHY ═══════════════════════════ -->
+<!-- ═══ WHY US ════════════════════════════════════ -->
 <section id="why">
   <div class="container">
     <div class="why-layout">
       <div class="sr">
         <div class="eyebrow">Why Skillbridg</div>
         <h2 class="display">Beyond Training.<br><em>Real Transformation.</em></h2>
-        <p class="lead">Backed by 12 years of real-world experience, Skillbridg delivers practical, customized, and ROI-driven learning solutions that create lasting behavior change and performance excellence across Chennai and South India.</p>
-        <div class="why-list">
-          <div class="why-item">
-            <div class="why-icon">⭐</div>
-            <div class="why-text">
-              <h5>12 Years of Real-World Experience</h5>
-              <p>Over a decade of corporate training and consulting expertise serving Chennai and South India's leading organizations.</p>
-            </div>
-          </div>
-          <div class="why-item">
-            <div class="why-icon">🏆</div>
-            <div class="why-text">
-              <h5>Industry Expert Trainers</h5>
-              <p>Facilitators with 12+ years of direct corporate leadership experience across IT, BFSI, manufacturing, and services sectors.</p>
-            </div>
-          </div>
-          <div class="why-item">
-            <div class="why-icon">📊</div>
-            <div class="why-text">
-              <h5>ROI-Driven Learning Solutions</h5>
-              <p>Programs designed with measurable outcomes tied directly to your business goals and KPIs — every session is accountable.</p>
-            </div>
-          </div>
-          <div class="why-item">
-            <div class="why-icon">🔄</div>
-            <div class="why-text">
-              <h5>Lasting Behavior Change Focus</h5>
-              <p>We go beyond training rooms to create sustained performance excellence that compounds over time through reinforcement and follow-through.</p>
-            </div>
-          </div>
+        <p class="lead" style="margin-bottom:36px;">Backed by 12+ years of real-world experience, Skillbridg delivers practical, customized, and ROI-driven learning solutions that create lasting behavior change and performance excellence across Chennai and South India.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="#approach" class="btn btn-primary">See Our Approach <span class="arrow">→</span></a>
+          <a href="#contact" class="btn btn-outline">Get in Touch</a>
         </div>
       </div>
-      <div class="why-visual sr sr-delay-2">
-        <div class="why-visual-title">Our Impact at a Glance</div>
-        <div class="why-stat">
-          <div class="why-stat-num">500<span>+</span></div>
-          <div class="why-stat-lbl">Corporates Served</div>
-        </div>
-        <div class="why-divider"></div>
-        <div class="why-stat">
-          <div class="why-stat-num">50<span>K+</span></div>
-          <div class="why-stat-lbl">Professionals Trained</div>
-        </div>
-        <div class="why-divider"></div>
-        <div class="why-stat">
-          <div class="why-stat-num">12<span>+</span></div>
-          <div class="why-stat-lbl">Years of Excellence</div>
-        </div>
-        <div class="why-divider"></div>
-        <div class="why-stat">
-          <div class="why-stat-num">4<span>+</span></div>
-          <div class="why-stat-lbl">Industries Covered</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ TRAINERS ═══════════════════════ -->
-<section id="trainers">
-  <div class="container">
-    <div class="trainers-head sr">
-      <div class="section-head-row">
-        <div>
-          <div class="eyebrow">Our Facilitators</div>
-          <h2 class="display">Expert <em>Trainers</em></h2>
-        </div>
-        <p class="lead" style="max-width:420px;">Our trainers bring decades of direct corporate experience to every program — practical, credible, and deeply attuned to the South Indian business context.</p>
-      </div>
-    </div>
-    <div class="trainer-grid sr sr-delay-1">
-      <div class="trainer-card">
-        <div class="trainer-avatar">SK</div>
-        <div>
-          <div class="trainer-name">Suresh Kumar</div>
-          <div class="trainer-title">Senior L&D Facilitator · 18 Years Experience</div>
-          <div class="trainer-bio">Former Head of Learning & Development at a leading IT services firm in Chennai. Specializes in leadership transitions, first-time manager programs, and emotional intelligence frameworks for technology teams.</div>
-          <div class="trainer-tags">
-            <span class="trainer-tag">Leadership</span>
-            <span class="trainer-tag">IT Sector</span>
-            <span class="trainer-tag">Manager Programs</span>
+      <div class="why-features sr sr-delay-2">
+        <div class="why-feat">
+          <div class="why-feat-icon">⭐</div>
+          <div>
+            <h5>12+ Years of Real-World Experience</h5>
+            <p>Over a decade of corporate training and consulting expertise delivered across Chennai and South India.</p>
           </div>
         </div>
-      </div>
-      <div class="trainer-card">
-        <div class="trainer-avatar">PR</div>
-        <div>
-          <div class="trainer-name">Priya Ramesh</div>
-          <div class="trainer-title">Corporate Communication Specialist · 14 Years Experience</div>
-          <div class="trainer-bio">Ex-Senior Manager, Talent Development at a major BFSI organization. Expert in workplace communication, executive presence, and cross-functional collaboration across banking and financial services environments.</div>
-          <div class="trainer-tags">
-            <span class="trainer-tag">Communication</span>
-            <span class="trainer-tag">BFSI Sector</span>
-            <span class="trainer-tag">Executive Presence</span>
+        <div class="why-feat">
+          <div class="why-feat-icon">🏆</div>
+          <div>
+            <h5>Industry Expert Trainers</h5>
+            <p>Seasoned facilitators with 12+ years of corporate leadership experience across IT, BFSI, and manufacturing sectors.</p>
           </div>
         </div>
-      </div>
-      <div class="trainer-card">
-        <div class="trainer-avatar">VN</div>
-        <div>
-          <div class="trainer-name">Venkatesh Nair</div>
-          <div class="trainer-title">Sales Excellence Trainer · 16 Years Experience</div>
-          <div class="trainer-bio">Former Regional Sales Director with hands-on field sales leadership across Chennai and Tamil Nadu. Trains sales teams in consultative selling, pre-sales consulting, and customer-centric revenue strategies.</div>
-          <div class="trainer-tags">
-            <span class="trainer-tag">Sales Training</span>
-            <span class="trainer-tag">Pre-Sales</span>
-            <span class="trainer-tag">South India Markets</span>
+        <div class="why-feat">
+          <div class="why-feat-icon">📊</div>
+          <div>
+            <h5>ROI-Driven Learning Solutions</h5>
+            <p>Programs designed with measurable outcomes tied directly to your business goals and KPIs.</p>
           </div>
         </div>
-      </div>
-      <div class="trainer-card">
-        <div class="trainer-avatar">AS</div>
-        <div>
-          <div class="trainer-name">Anitha Selvam</div>
-          <div class="trainer-title">Employability & Campus Programs Lead · 12 Years Experience</div>
-          <div class="trainer-bio">Specialist in campus-to-corporate readiness, having designed and delivered employability programs for over 200 engineering and management colleges across Tamil Nadu and Andhra Pradesh.</div>
-          <div class="trainer-tags">
-            <span class="trainer-tag">Campus Programs</span>
-            <span class="trainer-tag">Employability</span>
-            <span class="trainer-tag">South India Colleges</span>
+        <div class="why-feat">
+          <div class="why-feat-icon">🔄</div>
+          <div>
+            <h5>Lasting Behavior Change Focus</h5>
+            <p>We go beyond training rooms to create sustained performance excellence that compounds over time.</p>
           </div>
         </div>
       </div>
@@ -956,21 +858,17 @@ footer { background:#071B3B; border-top:1px solid rgba(47,168,224,0.12); }
   </div>
 </section>
 
-<!-- ═══ TESTIMONIALS ══════════════════ -->
+<!-- ═══ TESTIMONIALS ══════════════════════════════ -->
 <section id="testimonials">
   <div class="container">
-    <div class="testi-head sr">
-      <div class="testi-head-row">
-        <div>
-          <div class="eyebrow">Client Stories</div>
-          <h2 class="display">What Our <em>Clients Say</em></h2>
-        </div>
-        <p class="lead" style="max-width:380px;">Hear from the leaders and organizations we've partnered with across Chennai and South India.</p>
-      </div>
+    <div class="section-head center sr" style="margin-bottom:40px;">
+      <div class="eyebrow" style="justify-content:center;">Client Stories</div>
+      <h2 class="display">What Our <em>Clients Say</em></h2>
+      <p class="lead">Hear from the leaders and organizations we've had the privilege of partnering with.</p>
     </div>
     <div class="testi-grid">
       <div class="tcard sr sr-delay-1">
-        <div class="tcard-stars">★★★★★</div>
+        <div class="tcard-quote">"</div>
         <p>Skillbridg's leadership program transformed our middle management into confident decision-makers. The results were visible within weeks of the program concluding.</p>
         <div class="tcard-divider"></div>
         <div class="tcard-author">
@@ -982,7 +880,7 @@ footer { background:#071B3B; border-top:1px solid rgba(47,168,224,0.12); }
         </div>
       </div>
       <div class="tcard sr sr-delay-2">
-        <div class="tcard-stars">★★★★★</div>
+        <div class="tcard-quote">"</div>
         <p>The customized soft skills training helped our campus hires transition seamlessly into corporate roles. An exceptional program, beautifully tailored to our culture.</p>
         <div class="tcard-divider"></div>
         <div class="tcard-author">
@@ -994,14 +892,14 @@ footer { background:#071B3B; border-top:1px solid rgba(47,168,224,0.12); }
         </div>
       </div>
       <div class="tcard sr sr-delay-3">
-        <div class="tcard-stars">★★★★★</div>
-        <p>The sales excellence program drove a significant uplift in conversion rates within one quarter. Skillbridg's facilitators brought genuine business acumen, not just theory.</p>
+        <div class="tcard-quote">"</div>
+        <p>The sales excellence program drove a significant uplift in our conversion rates. Skillbridg's facilitators brought genuine business acumen, not just theory.</p>
         <div class="tcard-divider"></div>
         <div class="tcard-author">
           <div class="tcard-avatar">VP</div>
           <div>
             <div class="tcard-name">VP Sales</div>
-            <div class="tcard-role">BFSI Organization, South India</div>
+            <div class="tcard-role">BFSI Organization, Chennai</div>
           </div>
         </div>
       </div>
@@ -1009,66 +907,97 @@ footer { background:#071B3B; border-top:1px solid rgba(47,168,224,0.12); }
   </div>
 </section>
 
-<!-- ═══ IMPACT (bottom) ═══════════════ -->
+<!-- ═══ TRAINERS ══════════════════════════════════ -->
+<section id="trainers">
+  <div class="container">
+    <div class="section-head center sr" style="margin-bottom:40px;">
+      <div class="eyebrow" style="justify-content:center;">Trainer Credibility</div>
+      <h2 class="display">Expert <em>Facilitators</em></h2>
+      <p class="lead">Our trainers bring real-world corporate leadership experience to every program — ensuring practical, impactful learning that creates lasting change.</p>
+    </div>
+    <div class="cred-grid">
+      <div class="ccard sr sr-delay-1">
+        <span class="ccard-icon">💼</span>
+        <h4>Industry Veterans</h4>
+        <p>Trainers with 12+ years of real corporate leadership across IT, BFSI, manufacturing, and services sectors in South India.</p>
+      </div>
+      <div class="ccard sr sr-delay-2">
+        <span class="ccard-icon">🎯</span>
+        <h4>Practical Expertise</h4>
+        <p>Facilitators who have led teams, managed P&Ls, and built organizations — bringing credibility and relevance to every session.</p>
+      </div>
+      <div class="ccard sr sr-delay-3">
+        <span class="ccard-icon">🗺️</span>
+        <h4>South India Reach</h4>
+        <p>Delivered programs across Chennai, Bangalore, Hyderabad, Kochi, and Coimbatore to 500+ organizations.</p>
+      </div>
+      <div class="ccard sr sr-delay-4">
+        <span class="ccard-icon">📊</span>
+        <h4>Proven Impact</h4>
+        <p>Measurable program ROI tracked through rigorous post-program evaluation frameworks and follow-up assessments.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ IMPACT (bottom) ════════════════════════════ -->
 <section id="impact">
   <div class="container">
     <div class="impact-inner">
-      <div class="sr">
-        <div class="eyebrow">Our Impact</div>
-        <h2 class="display">Real Results.<br><em>Measurable Impact.</em></h2>
-        <p class="lead">Every number represents a professional empowered, a leader developed, and an organization transformed across Chennai and South India.</p>
+      <div class="impact-left sr">
+        <div class="eyebrow">Real Results</div>
+        <h2 class="display">Measurable <em>Impact</em></h2>
+        <p class="lead">Every number represents a professional empowered, a leader developed, and an organization transformed across South India.</p>
       </div>
       <div class="impact-grid sr sr-delay-2">
         <div class="icard">
           <span class="icard-icon">🏢</span>
           <div class="icard-num">500<span class="s">+</span></div>
           <div class="icard-label">Corporates Trained</div>
-          <div class="icard-sub">IT, Manufacturing, BFSI & more</div>
         </div>
         <div class="icard">
           <span class="icard-icon">👥</span>
           <div class="icard-num">50<span class="s">K+</span></div>
           <div class="icard-label">Professionals Impacted</div>
-          <div class="icard-sub">Chennai & South India</div>
         </div>
         <div class="icard">
           <span class="icard-icon">📅</span>
           <div class="icard-num">12<span class="s">+</span></div>
           <div class="icard-label">Years of Excellence</div>
-          <div class="icard-sub">Serving corporates since 2014</div>
         </div>
         <div class="icard">
-          <span class="icard-icon">🎓</span>
-          <div class="icard-num">200<span class="s">+</span></div>
-          <div class="icard-label">Colleges Partnered</div>
-          <div class="icard-sub">Tamil Nadu & Andhra Pradesh</div>
+          <span class="icard-icon">🌏</span>
+          <div class="icard-num">4<span class="s">+</span></div>
+          <div class="icard-label">South Indian Cities</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ CONTACT ════════════════════════ -->
+<!-- ═══ CONTACT ════════════════════════════════════ -->
 <section id="contact">
   <div class="container">
+    <div class="section-head sr" style="margin-bottom:48px;">
+      <div class="eyebrow">Get In Touch</div>
+      <h2 class="display">Let's Build Something <em>Impactful</em></h2>
+    </div>
     <div class="contact-layout">
-      <div class="contact-left sr">
-        <div class="eyebrow">Get In Touch</div>
-        <h2 class="display">Let's Build<br>Something<br><em>Impactful</em></h2>
-        <p class="lead">Build capable leaders, confident professionals, and future-ready organizations. Tell us about your training goals and we'll design a solution around them.</p>
+      <div class="sr">
+        <p class="lead" style="margin-bottom:32px;">Tell us about your training goals and we'll design a solution around them. We're here to help build capable leaders and future-ready organizations.</p>
         <div class="cinfo">
           <div class="cinfo-row">
             <div class="cinfo-icon">✉️</div>
             <div>
               <div class="cinfo-label">Email</div>
-              <div class="cinfo-val">info@skillbridglearningacademy.in</div>
+              <div class="cinfo-val"><a href="mailto:info@skillbridglearningacademy.in">info@skillbridglearningacademy.in</a></div>
             </div>
           </div>
           <div class="cinfo-row">
             <div class="cinfo-icon">📞</div>
             <div>
               <div class="cinfo-label">Phone</div>
-              <div class="cinfo-val">+91 98400 12345</div>
+              <div class="cinfo-val"><a href="tel:+919176543210">+91 91765 43210</a></div>
             </div>
           </div>
           <div class="cinfo-row">
@@ -1079,28 +1008,29 @@ footer { background:#071B3B; border-top:1px solid rgba(47,168,224,0.12); }
             </div>
           </div>
         </div>
-        <div style="margin-bottom:12px;">
-          <div class="cinfo-label" style="color:rgba(255,255,255,0.35);font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">Follow Us</div>
+
+        <div style="margin-bottom:8px;">
+          <div class="cinfo-label" style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-60);margin-bottom:12px;">Follow Us</div>
           <div class="social-row">
-            <a href="https://www.linkedin.com/company/skillbridg-learning-academy" target="_blank" rel="noopener" class="soc-btn">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="9" width="4" height="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              LinkedIn
+            <a href="https://linkedin.com" target="_blank" class="soc-link" title="LinkedIn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="9" width="4" height="12" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="4" cy="4" r="2" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a href="https://www.instagram.com/skillbridglearning" target="_blank" rel="noopener" class="soc-btn">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Instagram
+            <a href="https://twitter.com" target="_blank" class="soc-link" title="X / Twitter">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--ink)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.402 6.231H2.744l7.732-8.854L2.25 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
             </a>
-            <a href="https://www.youtube.com/@skillbridglearning" target="_blank" rel="noopener" class="soc-btn">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              YouTube
+            <a href="https://facebook.com" target="_blank" class="soc-link" title="Facebook">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a href="https://twitter.com/skillbridg" target="_blank" rel="noopener" class="soc-btn">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.402 6.231H2.744l7.732-8.854L2.25 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
-              X / Twitter
+            <a href="https://youtube.com" target="_blank" class="soc-link" title="YouTube">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="soc-link" title="Instagram">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
       </div>
+
       <div class="contact-form-wrap sr sr-delay-2">
         <div class="form-row2">
           <div class="fg">
@@ -1157,32 +1087,35 @@ footer { background:#071B3B; border-top:1px solid rgba(47,168,224,0.12); }
   </div>
 </section>
 
-<!-- ═══ FOOTER ════════════════════════ -->
+<!-- ═══ FOOTER ════════════════════════════════════ -->
 <footer>
   <div class="footer-main">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="#hero" class="nav-logo">
-            <img src="logo.png" alt="Skillbridg Logo"/>
-            <div class="nav-logo-text">
-              <span class="nav-logo-name">SKILLBRIDG</span>
-              <span class="nav-logo-sub">Learning Redefined</span>
+          <a href="#hero" class="nav-logo" style="margin-bottom:14px;display:inline-flex;">
+            <img src="logo.png" alt="Skillbridg" style="height:38px;width:auto;">
+            <div class="nav-logo-text" style="margin-left:10px;">
+              <span class="name" style="color:#fff;">SKILLBRIDG</span>
+              <span class="tagline">Learning Redefined</span>
             </div>
           </a>
-          <p>Chennai's premier corporate training academy. Transforming professionals and organizations since 2014 — serving Chennai and South India.</p>
+          <p>Chennai's premier corporate training academy. Transforming professionals and organizations across South India since 2012.</p>
           <div class="footer-social">
-            <a href="https://www.linkedin.com/company/skillbridg-learning-academy" target="_blank" rel="noopener" class="fsoc" title="LinkedIn">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="9" width="4" height="12" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="4" cy="4" r="2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <a href="https://linkedin.com" target="_blank" class="fsoc" title="LinkedIn">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="9" width="4" height="12" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="4" cy="4" r="2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a href="https://www.instagram.com/skillbridglearning" target="_blank" rel="noopener" class="fsoc" title="Instagram">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-            <a href="https://twitter.com/skillbridg" target="_blank" rel="noopener" class="fsoc" title="X / Twitter">
+            <a href="https://twitter.com" target="_blank" class="fsoc" title="X">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="#fff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.402 6.231H2.744l7.732-8.854L2.25 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
             </a>
-            <a href="https://www.youtube.com/@skillbridglearning" target="_blank" rel="noopener" class="fsoc" title="YouTube">
+            <a href="https://facebook.com" target="_blank" class="fsoc" title="Facebook">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="https://youtube.com" target="_blank" class="fsoc" title="YouTube">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="fsoc" title="Instagram">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>
         </div>
@@ -1203,19 +1136,17 @@ footer { background:#071B3B; border-top:1px solid rgba(47,168,224,0.12); }
             <li><a href="#why">About Us</a></li>
             <li><a href="#approach">Our Approach</a></li>
             <li><a href="#trainers">Our Trainers</a></li>
-            <li><a href="#testimonials">Client Stories</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h5>Connect</h5>
           <ul>
-            <li><a href="https://www.linkedin.com/company/skillbridg-learning-academy" target="_blank">LinkedIn</a></li>
-            <li><a href="https://www.instagram.com/skillbridglearning" target="_blank">Instagram</a></li>
-            <li><a href="https://twitter.com/skillbridg" target="_blank">X / Twitter</a></li>
-            <li><a href="https://www.youtube.com/@skillbridglearning" target="_blank">YouTube</a></li>
             <li><a href="mailto:info@skillbridglearningacademy.in">info@skillbridglearningacademy.in</a></li>
-            <li><a href="tel:+919840012345">+91 98400 12345</a></li>
+            <li><a href="tel:+919176543210">+91 91765 43210</a></li>
+            <li><a href="#">Chennai, Tamil Nadu</a></li>
+            <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+            <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
           </ul>
         </div>
       </div>
@@ -1224,87 +1155,51 @@ footer { background:#071B3B; border-top:1px solid rgba(47,168,224,0.12); }
   <div class="footer-bottom">
     <div class="container">
       <span>© 2026 <strong>Skillbridg Learning Academy</strong> · Chennai, India · All rights reserved.</span>
-      <span>Designed with precision · <strong>Learning Redefined</strong></span>
+      <span><strong>Learning Redefined</strong></span>
     </div>
   </div>
 </footer>
 
 <script>
-// ── Hamburger / mobile nav
+// Hamburger
 const hamburger = document.getElementById('hamburger');
 const mobileNav = document.getElementById('mobileNav');
-
 function closeMobileNav() {
   hamburger.classList.remove('open');
   mobileNav.classList.remove('open');
   document.body.style.overflow = '';
 }
-
 hamburger.addEventListener('click', () => {
   const isOpen = hamburger.classList.toggle('open');
   mobileNav.classList.toggle('open', isOpen);
   document.body.style.overflow = isOpen ? 'hidden' : '';
 });
 
-// ── NAV scroll state
+// Nav scroll
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 40);
-}, { passive: true });
+}, { passive:true });
 if (window.scrollY > 40) nav.classList.add('scrolled');
 
-// ── Scroll reveal
+// Scroll reveal
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      io.unobserve(e.target);
-    }
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
   });
-}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-
+}, { threshold:0.08, rootMargin:'0px 0px -30px 0px' });
 document.querySelectorAll('.sr').forEach(el => io.observe(el));
 
-// ── Smooth nav links
+// Smooth nav links
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const target = document.querySelector(a.getAttribute('href'));
     if (target) {
       e.preventDefault();
-      const offset = 68;
-      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-      window.scrollTo({ top, behavior: 'smooth' });
+      window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - 72, behavior:'smooth' });
     }
   });
 });
-
-// ── Counter animation
-function animateCounters() {
-  document.querySelectorAll('.icard-num, .hstat-num, .why-stat-num').forEach(el => {
-    const text = el.textContent;
-    const num = parseFloat(text.replace(/[^0-9.]/g,''));
-    if (!num || el.dataset.animated) return;
-    el.dataset.animated = true;
-    const suffix = text.replace(num.toString(),'');
-    let start = 0;
-    const duration = 1600;
-    const step = (ts) => {
-      if (!start) start = ts;
-      const progress = Math.min((ts - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.floor(eased * num) + suffix;
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  });
-}
-
-const counterObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) animateCounters(); });
-}, { threshold: 0.25 });
-
-const impactSec = document.getElementById('impact');
-if (impactSec) counterObs.observe(impactSec);
 </script>
 </body>
 </html>
