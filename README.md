@@ -1,196 +1,216 @@
-# Synergy Learning Academy - Website Clone
+# Skillbridg Learning Academy — Website
 
-A complete full-stack website for a corporate training academy, built with vanilla HTML/CSS/JS frontend and Node.js/Express backend.
+> **Learning Redefined** · Chennai's Premier Corporate Training Academy
+
+A fully responsive, single-page marketing website for Skillbridg Learning Academy built with pure HTML, CSS, and vanilla JavaScript — no frameworks, no dependencies, no build step required.
+
+---
+
+## 🚀 Quick Start
+
+```bash
+# Clone or download the project
+git clone https://github.com/your-org/skillbridg-website.git
+cd skillbridg-website
+
+# Open directly in browser (no server needed)
+open index.html
+
+# Or serve locally
+npx serve .
+# → http://localhost:3000
+```
+
+---
 
 ## 📁 Project Structure
 
 ```
-synergy-clone/
-├── frontend/
-│   └── index.html          # Complete single-file frontend (HTML + CSS + JS)
-├── backend/
-│   ├── server.js            # Express API server
-│   ├── package.json         # Node.js dependencies
-│   ├── .env                 # Environment configuration
-│   └── data/
-│       └── contacts.db      # SQLite database (auto-created)
-└── README.md
+skillbridg-website/
+├── index.html        # Complete single-file website
+├── logo.png          # Brand logo (place your file here)
+└── README.md         # This file
 ```
 
-## 🚀 Quick Start
-
-### 1. Install Dependencies
-
-```bash
-cd backend
-npm install
-```
-
-### 2. Start the Server
-
-```bash
-npm start
-```
-
-### 3. Open in Browser
-
-Visit **http://localhost:5000**
-
-That's it! The server serves both the frontend and the API.
+> All CSS and JavaScript are embedded inside `index.html`. There are no external local dependencies beyond the logo image and a Google Fonts stylesheet (loaded via CDN).
 
 ---
 
-## 🎨 How to Customize
+## 🎨 Brand & Design Tokens
 
-### Change Company Name & Branding
+| Token | Value | Usage |
+|---|---|---|
+| `--deep` | `#0a052a` | Hero bg, testimonials bg, footer bg |
+| `--blue` | `#029fe0` | Primary CTA, accents, stats band |
+| `--blue-h` | `#00b8ff` | Button hover state |
+| `--white` | `#ffffff` | Light section backgrounds |
+| `--off` | `#f4f9fd` | Alternate section tint |
+| `--ink` | `#0e1a30` | Body text |
 
-Open `frontend/index.html` and find/replace:
+**Fonts** (loaded from Google Fonts):
+- **DM Serif Display** — headings & display numbers
+- **DM Sans** — all body copy, labels, navigation
 
-| Find                              | Replace With              |
-|-----------------------------------|---------------------------|
-| `Synergy Learning Academy`        | Your company name         |
-| `Synergy Learning`                | Your short brand name     |
-| `Chennai`                         | Your city                 |
-| `info@synergylearningacademy.com` | Your email                |
-| `+91 98765 43210`                 | Your phone number         |
-| `wa.me/919876543210`              | Your WhatsApp number      |
+---
 
-### Change Colors
+## 📄 Page Sections
 
-Edit the CSS variables in `index.html` under `:root`:
+| # | Section | ID | Background |
+|---|---|---|---|
+| 1 | Navigation | `#nav` | White / fixed |
+| 2 | Hero | `#hero` | White |
+| 3 | Sector Ticker | `#tkr` | Off-white |
+| 4 | Services | `#services` | White |
+| 5 | Approach | `#approach` | Off-white |
+| 6 | Why Skillbridg | `#why` | White |
+| 7 | Testimonials | `#testi` | `#0a052a` dark |
+| 8 | Stats Band | `#sband` | `#029fe0` blue |
+| 9 | Contact | `#contact` | White |
+| 10 | Footer | `footer` | `#0a052a` dark |
 
-```css
-:root {
-  --yellow: #f5a623;           /* Primary accent (buttons, highlights) */
-  --dark-blue: #1a1a4e;        /* Headings color */
-  --maroon: #8b1538;           /* Service card titles */
-  --gradient-hero: linear-gradient(135deg, #2d1b69 0%, #1a237e 30%, #4a148c 60%, #880e4f 100%);
-  --footer-bg: #1e2a3a;        /* Footer background */
-}
+---
+
+## ✏️ Common Customizations
+
+### Update contact details
+Search for the following strings in `index.html` and replace:
+
+```
+info@skillbridglearningacademy.in   → your email
++91 91765 43210                     → your phone number
+Chennai, Tamil Nadu, India          → your location
 ```
 
-### Change Logo
+### Swap the logo
+Replace `logo.png` in the project root with your logo file (recommended height: **40px**, any width). The `<img>` tag references `logo.png` in both the nav and footer.
 
-Replace the text logo in the navbar:
+### Change the hero headline
+Find the `<h1 class="hh1">` tag and update the text:
+
 ```html
-<a href="#" class="nav-logo">Your Brand Name</a>
+<h1 class="hh1">
+  Transform<br>
+  Your Workforce.<br>
+  <em>Redefine Learning.</em>   <!-- em = italic blue accent -->
+</h1>
 ```
 
-Or replace with an image:
+### Update stats numbers
+Find the `#sband` section and edit the `.scn` values:
+
 ```html
-<a href="#"><img src="your-logo.png" alt="Logo" height="40" /></a>
+<div class="scn">500<span>+</span></div>   <!-- Corporates Trained -->
+<div class="scn">50<span>K+</span></div>   <!-- Professionals Impacted -->
+<div class="scn">12<span>+</span></div>    <!-- Years of Excellence -->
+<div class="scn">4<span>+</span></div>     <!-- South Indian Cities -->
 ```
 
-### Change Services/Content
+### Update social media links
+Search for `https://linkedin.com`, `https://instagram.com`, etc. and replace with your actual profile URLs.
 
-All content is in plain HTML in `index.html`. Just edit the text in each section:
-- **Stats**: Search for `stat-number` to change the numbers
-- **Services**: Search for `service-card` to edit service cards
-- **Testimonials**: Search for `testimonial-card` to edit quotes
-- **Approach**: Search for `approach-card` to edit methodology steps
+### Add or remove a service row
+Each service is a `.svr` block inside `.svl`. Copy and paste a block, then update the number, icon, title, description, and tags:
+
+```html
+<div class="svr">
+  <div class="svnum">06</div>
+  <div class="svb">
+    <div class="svic">🎤</div>
+    <div class="svt">
+      <h3>Your New Service</h3>
+      <p>Description of the service goes here.</p>
+      <div class="svtags">
+        <span class="svtag">Tag One</span>
+        <span class="svtag">Tag Two</span>
+      </div>
+    </div>
+  </div>
+  <div class="svarr">→</div>
+</div>
+```
 
 ---
 
-## 🔌 Backend API Reference
+## 📱 Responsive Breakpoints
 
-### Contact Form
-
-| Method | Endpoint                  | Description              |
-|--------|---------------------------|--------------------------|
-| POST   | `/api/contact`            | Submit contact form      |
-| GET    | `/api/contacts`           | List all submissions     |
-| GET    | `/api/contacts/:id`       | Get single submission    |
-| PUT    | `/api/contacts/:id/status`| Update status            |
-| DELETE | `/api/contacts/:id`       | Delete submission        |
-| GET    | `/api/stats`              | Dashboard statistics     |
-
-### POST /api/contact
-
-```json
-{
-  "name": "John Doe",
-  "email": "john@company.com",
-  "company": "Acme Corp",
-  "phone": "+91 98765 43210",
-  "message": "We need leadership training for 50 managers."
-}
-```
-
-### GET /api/contacts
-
-Query params: `?status=new&page=1&limit=20&search=keyword`
+| Breakpoint | Layout changes |
+|---|---|
+| `≤ 1024px` | Reduced padding, tighter footer columns |
+| `≤ 900px` | Mobile nav (hamburger), hero panel hidden, all grids stack |
+| `≤ 640px` | Full-width buttons, single-column testimonials, simplified stats |
+| `≤ 380px` | Minimum font sizes, fully stacked stats grid |
 
 ---
 
-## 📧 Email Notifications (Optional)
+## ⚙️ JavaScript Features
 
-To get email alerts when someone submits the form, edit `.env`:
+All JS is vanilla, no libraries required.
 
-```env
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_SECURE=false
-SMTP_USER=your-email@gmail.com
-SMTP_PASS=your-app-password
-NOTIFICATION_EMAIL=info@yourcompany.com
-```
-
-For Gmail, use an [App Password](https://support.google.com/accounts/answer/185833).
+| Feature | Description |
+|---|---|
+| Mobile nav | Hamburger toggle with body scroll lock |
+| Nav shadow | Box-shadow added on scroll past 40px |
+| Scroll reveal | `IntersectionObserver` fades elements in on scroll |
+| Smooth anchors | All `href="#section"` links scroll with nav offset compensation |
+| Counter animation | Stats band numbers count up with eased animation on first view |
+| Sector ticker | CSS `@keyframes` animation, pauses on hover |
 
 ---
 
 ## 🌐 Deployment
 
-### On EC2 / VPS
+The site is a single static file and can be deployed anywhere:
 
+**Netlify (drag & drop)**
+1. Go to [app.netlify.com](https://app.netlify.com)
+2. Drag the project folder onto the deploy zone
+
+**GitHub Pages**
 ```bash
-# 1. Clone/upload the project
-# 2. Install Node.js (v18+)
-# 3. Install dependencies
-cd backend && npm install
-
-# 4. Set up environment
-cp .env .env.production
-# Edit .env.production with your settings
-
-# 5. Run with PM2 (recommended)
-npm install -g pm2
-pm2 start server.js --name "synergy-website"
-pm2 save
-pm2 startup
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/your-org/skillbridg-website.git
+git push -u origin main
+# Enable Pages in repo Settings → Pages → Branch: main
 ```
 
-### With Nginx (reverse proxy)
-
-```nginx
-server {
-    listen 80;
-    server_name yourdomain.com;
-
-    location / {
-        proxy_pass http://localhost:5000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_cache_bypass $http_upgrade;
-    }
-}
+**Vercel**
+```bash
+npx vercel
 ```
 
 ---
 
-## 🛡️ Security Notes
+## 🔗 External Dependencies (CDN only)
 
-- Rate limiting is enabled (10 form submissions per 15 minutes per IP)
-- Helmet.js is used for security headers
-- Input validation on all form fields
-- SQLite database stored locally (no external DB needed)
-- For production: add authentication to admin API endpoints
+| Resource | URL | Purpose |
+|---|---|---|
+| DM Serif Display | fonts.googleapis.com | Display headings |
+| DM Sans | fonts.googleapis.com | Body & UI text |
+
+No npm packages. No build tools. No JavaScript frameworks.
+
+---
+
+## 📋 Browser Support
+
+| Browser | Support |
+|---|---|
+| Chrome 90+ | ✅ Full |
+| Firefox 88+ | ✅ Full |
+| Safari 14+ | ✅ Full |
+| Edge 90+ | ✅ Full |
+| IE 11 | ❌ Not supported |
 
 ---
 
 ## 📝 License
 
-This is a template website. Customize and use for your own business.
+© 2026 Skillbridg Learning Academy · All rights reserved.  
+This codebase is proprietary. Do not redistribute without written permission.
+
+---
+
+*Built with HTML · CSS · Vanilla JS — no frameworks, no build steps, just the web.*
